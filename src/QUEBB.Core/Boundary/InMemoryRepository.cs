@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using QUEBB.Core.Entities;
 
 namespace QUEBB.Core.Boundary
@@ -11,6 +12,11 @@ namespace QUEBB.Core.Boundary
         public Post GetPost(string id)
         {
             return _data[id];
+        }
+
+        public IQueryable<Post> GetPosts()
+        {
+            return new EnumerableQuery<Post>(_data.Values);
         }
 
         public string StorePost(Post post)

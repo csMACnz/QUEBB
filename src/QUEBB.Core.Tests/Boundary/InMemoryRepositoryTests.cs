@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
 
@@ -17,17 +18,44 @@ namespace QUEBB.Core.Tests.Boundary
         public class GivenAnEmptyRepository
         {
             [TestClass]
+            public class WhenGetAllPostsIsCalled
+            {
+                private IQueryable<Post> _result;
+
+                [TestInitialize]
+                public void Setup()
+                {
+                    var repository = new InMemoryRepository();
+                    _result = repository.GetPosts();
+                }
+
+                [TestMethod]
+                public void ThenResultIsNotNull()
+                {
+                    Assert.IsNotNull(_result);
+                }
+
+                [TestMethod]
+                public void ThenResultEvaluatesToEmpty()
+                {
+                    Assert.AreEqual(0, _result.Count());
+                }
+            }
+
+            [TestClass]
             public class WhenAPostIsAdded
             {
                 private InMemoryRepository _repository;
                 private string _createdId;
+                private Post _addedPost;
                 private const string CreatedTitle = "The Title";
 
                 [TestInitialize]
                 public void Setup()
                 {
                     _repository = new InMemoryRepository();
-                    _createdId = _repository.StorePost(new Post { Id = null, Title = CreatedTitle });
+                    _addedPost = new Post { Id = null, Title = CreatedTitle };
+                    _createdId = _repository.StorePost(_addedPost);
                 }
 
                 [TestMethod]
@@ -48,6 +76,26 @@ namespace QUEBB.Core.Tests.Boundary
                 {
                     var retrievedPost = _repository.GetPost(_createdId);
                     Assert.AreEqual(CreatedTitle, retrievedPost.Title);
+                }
+
+                [TestMethod]
+                public void ThenGetPostReturnsWithCorrectId()
+                {
+                    var retrievedPost = _repository.GetPost(_createdId);
+                    Assert.AreEqual(_createdId, retrievedPost.Id);
+                }
+
+                [TestMethod]
+                public void ThenGetPostReturnsAPostThatIsReferenciallyDifferent()
+                {
+                    var retrievedPost = _repository.GetPost(_createdId);
+                    Assert.AreNotSame(_addedPost, retrievedPost);
+                }
+                [TestMethod]
+                public void ThenGetPostReturnsOneResult()
+                {
+                    var retrievedPosts = _repository.GetPosts();
+                    Assert.AreEqual(1, retrievedPosts.Count());
                 }
             }
 
@@ -82,6 +130,13 @@ namespace QUEBB.Core.Tests.Boundary
                     var retrievedPost = _repository.GetPost(_secondCreatedId);
                     Assert.IsNotNull(retrievedPost);
                     Assert.AreEqual(CreatedTitle2, retrievedPost.Title);
+                }
+
+                [TestMethod]
+                public void ThenGetPostReturnsTwoResults()
+                {
+                    var retrievedPosts = _repository.GetPosts();
+                    Assert.AreEqual(2, retrievedPosts.Count());
                 }
             }
         }

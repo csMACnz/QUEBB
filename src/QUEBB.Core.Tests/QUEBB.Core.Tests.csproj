@@ -59,6 +59,7 @@
     <Compile Include="AddPost\AddPostResponseTests.cs" />
     <Compile Include="AddPost\AddPostHandlerTests.cs" />
     <Compile Include="Boundary\InMemoryRepositoryTests.cs" />
+    <Compile Include="GetAllPosts\GetAllPostsHandlerTests.cs" />
     <Compile Include="QuebbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,6 +72,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -19,7 +19,12 @@ namespace QUEBB.Core.Tests.AddPost
 
         private static AddPostHandler CreateHandler()
         {
-            return new AddPostHandler();
+            return new AddPostHandler(new InMemoryRepository());
+        }
+
+        private static AddPostHandler CreateHandler(IRepository repository)
+        {
+            return new AddPostHandler(repository);
         }
 
         public class GivenAnAddPostHandler
@@ -27,19 +32,11 @@ namespace QUEBB.Core.Tests.AddPost
             [TestClass]
             public class IfNotPassedARepository
             {
-                private AddPostHandler _handler;
-
-                [TestInitialize]
-                public void Setup()
-                {
-                    _handler = CreateHandler();
-                }
-
                 [TestMethod]
                 [ExpectedException(typeof(ArgumentNullException))]
                 public void ThrowsArgumentNullException()
                 {
-                    _handler.Handle(null, new AddPostRequest(new NewPost()));
+                    CreateHandler(null);
                 }
             }
 
@@ -58,7 +55,7 @@ namespace QUEBB.Core.Tests.AddPost
                 [ExpectedException(typeof(ArgumentNullException))]
                 public void ThrowsArgumentNullException()
                 {
-                    _handler.Handle(new Mock<IRepository>().Object,null);
+                    _handler.Handle(null);
                 }
             }
 
@@ -67,7 +64,7 @@ namespace QUEBB.Core.Tests.AddPost
             {
                 private AddPostResponse _response;
                 private AddPostHandler _handler;
-                private NewPost _newPost;
+                private Post _newPost;
                 private Mock<IRepository> _mockPersistance;
                 private const string NewId = "myNewId";
 
@@ -81,9 +78,9 @@ namespace QUEBB.Core.Tests.AddPost
                     _mockPersistance
                         .Setup(m => m.GetPost(It.IsAny<string>()))
                         .Returns(new Post {Id = NewId});
-                    _handler = CreateHandler();
-                    _newPost = new NewPost();
-                    _response = _handler.Handle(_mockPersistance.Object, new AddPostRequest(_newPost));
+                    _handler = CreateHandler(_mockPersistance.Object);
+                    _newPost = new Post();
+                    _response = _handler.Handle(new AddPostRequest(_newPost));
                 }
 
                 [TestMethod]
@@ -118,14 +115,14 @@ namespace QUEBB.Core.Tests.AddPost
 
                 private AddPostResponse _response;
                 private AddPostHandler _handler;
-                private NewPost _newPost;
+                private Post _newPost;
 
                 [TestInitialize]
                 public void Setup()
                 {
                     _handler = CreateHandler();
-                    _newPost = new NewPost {Title = Title};
-                    _response = _handler.Handle(new InMemoryRepository(), new AddPostRequest(_newPost));
+                    _newPost = new Post {Title = Title};
+                    _response = _handler.Handle(new AddPostRequest(_newPost));
                 }
 
                 [TestMethod]

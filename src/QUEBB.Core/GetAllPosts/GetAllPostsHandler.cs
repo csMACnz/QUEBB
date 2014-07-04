@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Linq;
 using QUEBB.Core.Boundary;
-using QUEBB.Core.Entities;
 
-namespace QUEBB.Core.AddPost
+namespace QUEBB.Core.GetAllPosts
 {
-    public class AddPostHandler
+    public class GetAllPostsHandler
     {
         private readonly IRepository _repository;
-        
-        public AddPostHandler(IRepository repository)
+
+        public GetAllPostsHandler(IRepository repository)
         {
             if (repository == null)
             {
@@ -17,16 +17,15 @@ namespace QUEBB.Core.AddPost
             _repository = repository;
         }
 
-        public AddPostResponse Handle(AddPostRequest request)
+        public GetAllPostsResponse Handle(GetAllPostsRequest request)
         {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
             }
-            var id = _repository.StorePost(new Post {Title = request.Post.Title});
-            var post = _repository.GetPost(id);
+            var posts = _repository.GetPosts();
 
-            return new AddPostResponse(post);
+            return new GetAllPostsResponse(posts);
         }
     }
 }

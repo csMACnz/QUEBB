@@ -5,7 +5,7 @@ namespace QUEBB.Core.AddPost
 {
     public class AddPostRequest
     {
-        public AddPostRequest(NewPost post)
+        public AddPostRequest(Post post)
         {
             if (post == null)
             {
@@ -14,6 +14,6 @@ namespace QUEBB.Core.AddPost
             Post = post;
         }
 
-        public NewPost Post { get; private set; }
+        public Post Post { get; private set; }
     }
 }

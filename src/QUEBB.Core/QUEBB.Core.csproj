@@ -44,8 +44,9 @@
     <Compile Include="Boundary\InMemoryRepository.cs" />
     <Compile Include="Boundary\IRepository.cs" />
     <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\NewPost.cs" />
-    <Compile Include="Entities\PostBase.cs" />
+    <Compile Include="GetAllPosts\GetAllPostsHandler.cs" />
+    <Compile Include="GetAllPosts\GetAllPostsRequest.cs" />
+    <Compile Include="GetAllPosts\GetAllPostsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quebb.cs" />
   </ItemGroup>

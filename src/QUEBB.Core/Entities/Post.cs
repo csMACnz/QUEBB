@@ -1,7 +1,9 @@
 ﻿namespace QUEBB.Core.Entities
 {
-    public class Post : PostBase
+    public class Post
     {
+        public string Title { get; set; }
+
         public string Id { get; set; }
     }
 }
