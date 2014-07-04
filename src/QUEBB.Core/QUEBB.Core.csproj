@@ -41,6 +41,8 @@
     <Compile Include="AddPost\AddPostHandler.cs" />
     <Compile Include="AddPost\AddPostRequest.cs" />
     <Compile Include="AddPost\AddPostResponse.cs" />
+    <Compile Include="Boundary\InMemoryRepository.cs" />
+    <Compile Include="Boundary\IRepository.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\NewPost.cs" />
     <Compile Include="Entities\PostBase.cs" />

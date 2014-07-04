@@ -1,4 +1,5 @@
 ﻿using QUEBB.Core.AddPost;
+using QUEBB.Core.Boundary;
 
 namespace QUEBB.Core
 {
@@ -7,9 +8,16 @@ namespace QUEBB.Core
     /// </summary>
     public class Quebb
     {
+        private IRepository _repository;
+
+        public Quebb(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         public AddPostResponse AddPost(AddPostRequest request)
         {
-            return new AddPostHandler().Handle(request);
+            return new AddPostHandler().Handle(_repository, request);
         }
     }
 }

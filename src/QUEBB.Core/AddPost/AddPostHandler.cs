@@ -1,17 +1,25 @@
 ﻿using System;
+using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
 
 namespace QUEBB.Core.AddPost
 {
     public class AddPostHandler
     {
-        public AddPostResponse Handle(AddPostRequest request)
+        public AddPostResponse Handle(IRepository repository, AddPostRequest request)
         {
+            if (repository == null)
+            {
+                throw new ArgumentNullException("repository");
+            }
             if (request == null)
             {
                 throw new ArgumentNullException("request");
             }
-            return new AddPostResponse(new Post {Id = 1, Title = request.Post.Title});
+            var id = repository.StorePost(new Post {Id = "newId", Title = request.Post.Title});
+            var post = repository.GetPost(id);
+
+            return new AddPostResponse(post);
         }
     }
 }
