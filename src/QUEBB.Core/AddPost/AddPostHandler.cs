@@ -1,6 +1,7 @@
 ﻿using System;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
+using QUEBB.Core.Infrastructure;
 
 namespace QUEBB.Core.AddPost
 {
@@ -23,7 +24,20 @@ namespace QUEBB.Core.AddPost
             {
                 throw new ArgumentNullException("request");
             }
+            
+            //validation
+            if (request.Post.Id != null)
+            {
+                throw new ValidationException();
+            }
+            if (request.Post.Title == null)
+            {
+                throw new ValidationException();
+            }
+            
+            //Handle
             var id = _repository.StorePost(new Post {Title = request.Post.Title});
+
             var post = _repository.GetPost(id);
 
             return new AddPostResponse(post);
