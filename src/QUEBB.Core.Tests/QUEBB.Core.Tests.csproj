@@ -58,6 +58,12 @@
     <Compile Include="AddPost\AddPostRequestTests.cs" />
     <Compile Include="AddPost\AddPostResponseTests.cs" />
     <Compile Include="AddPost\AddPostHandlerTests.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfPassedANewPostWithANullTitle.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfNotPassedARepository.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfPassedAnEmptyRequest.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfPassedANewPostWithAnId.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfPassedANewPostWithATitle.cs" />
+    <Compile Include="AddPost\GivenAnAddPostHandler\IfPassedAValidNewPost.cs" />
     <Compile Include="Boundary\CommonRepositoryTests\GivenAnEmptyRepository\WhenTwoPostsIsAdded.cs" />
     <Compile Include="Boundary\CommonRepositoryTests\GivenAnEmptyRepository\WhenAPostIsAdded.cs" />
     <Compile Include="Boundary\CommonRepositoryTests\GivenAnEmptyRepository\WhenGetAllPostsIsCalled.cs" />
@@ -71,6 +77,9 @@
     <Compile Include="Boundary\InMemoryQueryableRepositoryTests\InMemoryQueryableRepositoryTests.cs" />
     <Compile Include="Entities\PostTests.cs" />
     <Compile Include="GetAllPosts\GetAllPostsHandlerTests.cs" />
+    <Compile Include="GetAllPosts\GivenAGetAllPostsHandler\WhenRepositoryIsEmpty.cs" />
+    <Compile Include="GetAllPosts\GivenAGetAllPostsHandler\IfNotPassedARepository.cs" />
+    <Compile Include="GetAllPosts\GivenAGetAllPostsHandler\IfPassedAnEmptyRequest.cs" />
     <Compile Include="QuebbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
