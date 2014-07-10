@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using QUEBB.Core.Entities;
 
 namespace QUEBB.Core.Boundary
@@ -6,8 +6,9 @@ namespace QUEBB.Core.Boundary
     public interface IRepository
     {
         string StorePost(Post post);
-        
+
         Post GetPost(string id);
-        IQueryable<Post> GetPosts();
+
+        IEnumerable<Post> GetAllPosts();
     }
 }

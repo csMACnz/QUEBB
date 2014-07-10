@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using QUEBB.Core.Boundary;
 
 namespace QUEBB.Core.GetAllPosts
@@ -23,7 +22,7 @@ namespace QUEBB.Core.GetAllPosts
             {
                 throw new ArgumentNullException("request");
             }
-            var posts = _repository.GetPosts();
+            var posts = _repository.GetAllPosts();
 
             return new GetAllPostsResponse(posts);
         }

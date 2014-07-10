@@ -42,6 +42,7 @@
     <Compile Include="AddPost\AddPostResponse.cs" />
     <Compile Include="Boundary\InMemoryRepository.cs" />
     <Compile Include="Boundary\IRepository.cs" />
+    <Compile Include="Boundary\QueryableRepository.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="GetAllPosts\GetAllPostsHandler.cs" />
     <Compile Include="GetAllPosts\GetAllPostsRequest.cs" />
