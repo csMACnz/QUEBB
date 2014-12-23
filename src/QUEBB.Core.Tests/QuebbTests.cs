@@ -1,16 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.Boundary;
+﻿using QUEBB.Core.Boundary;
+using Xunit;
 
 namespace QUEBB.Core.Tests
 {
-    [TestClass]
     public class QuebbTests
     {
-        [TestMethod]
+        [Fact]
         public void CanCreateQuebb()
         {
             var quebb = new Quebb(new InMemoryRepository());
-            Assert.IsNotNull(quebb);
+            Assert.NotNull(quebb);
         }
     }
 }

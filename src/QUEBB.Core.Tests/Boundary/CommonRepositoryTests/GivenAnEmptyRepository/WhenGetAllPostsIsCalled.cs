@@ -1,35 +1,33 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
+using Xunit;
 
 namespace QUEBB.Core.Tests.Boundary.CommonRepositoryTests.GivenAnEmptyRepository
 {
-    [TestClass]
     public abstract class WhenGetAllPostsIsCalled
     {
-        private IEnumerable<Post> _result;
+        private readonly IEnumerable<Post> _result;
 
         protected abstract IRepository CreateRepository();
 
-        [TestInitialize]
-        public void Setup()
+        public WhenGetAllPostsIsCalled()
         {
             var repository = CreateRepository();
             _result = repository.GetAllPosts();
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenResultIsNotNull()
         {
-            Assert.IsNotNull(_result);
+            Assert.NotNull(_result);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenResultEvaluatesToEmpty()
         {
-            Assert.AreEqual(0, _result.Count());
+            Assert.Equal(0, _result.Count());
         }
     }
 }

@@ -1,18 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.AddPost;
+﻿using QUEBB.Core.AddPost;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
+using Xunit;
 
 namespace QUEBB.Core.Tests.AddPost
 {
-    [TestClass]
     public class AddPostHandlerTests
     {
-        [TestMethod]
+        [Fact]
         public void CanCreateAddPostHandler()
         {
             var handler = CreateHandler();
-            Assert.IsNotNull(handler);
+            Assert.NotNull(handler);
         }
 
         public static AddPostHandler CreateHandler()

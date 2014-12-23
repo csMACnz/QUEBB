@@ -1,37 +1,34 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.GetAllPosts;
+﻿using QUEBB.Core.GetAllPosts;
+using Xunit;
 
 namespace QUEBB.Core.Tests.GetAllPosts.GivenAGetAllPostsHandler
 {
-    [TestClass]
     public class WhenRepositoryIsEmpty
     {
-        private GetAllPostsHandler _handler;
-        private GetAllPostsResponse _results;
+        private readonly GetAllPostsResponse _results;
 
-        [TestInitialize]
-        public void Setup()
+        public WhenRepositoryIsEmpty()
         {
-            _handler = GetAllPostsHandlerTests.CreateHandler();
-            _results = _handler.Handle(new GetAllPostsRequest());
+            GetAllPostsHandler handler = GetAllPostsHandlerTests.CreateHandler();
+            _results = handler.Handle(new GetAllPostsRequest());
         }
 
-        [TestMethod]
+        [Fact]
         public void ReturnsSuccessfully()
         {
-            Assert.IsNotNull(_results);
+            Assert.NotNull(_results);
         }
 
-        [TestMethod]
+        [Fact]
         public void ReturnedPostsIsNotNull()
         {
-            Assert.IsNotNull(_results.Posts);
+            Assert.NotNull(_results.Posts);
         }
 
-        [TestMethod]
+        [Fact]
         public void ReturnsNoItems()
         {
-            Assert.AreEqual(0, _results.Posts.Count);
+            Assert.Equal(0, _results.Posts.Count);
         }
     }
 

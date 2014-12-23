@@ -1,16 +1,14 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace QUEBB.Core.Tests.GetAllPosts.GivenAGetAllPostsHandler
 {
-    [TestClass]
     public class IfNotPassedARepository
     {
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void ThrowsArgumentNullException()
         {
-            GetAllPostsHandlerTests.CreateHandler(null);
+            Assert.Throws<ArgumentNullException>(() => GetAllPostsHandlerTests.CreateHandler(null));
         }
     }
 }

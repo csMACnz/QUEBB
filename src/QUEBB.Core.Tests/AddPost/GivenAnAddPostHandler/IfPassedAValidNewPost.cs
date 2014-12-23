@@ -1,23 +1,19 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using QUEBB.Core.AddPost;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
+using Xunit;
 
 namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
 {
-    [TestClass]
     public class IfPassedAValidNewPost
     {
-        private AddPostResponse _response;
-        private AddPostHandler _handler;
-        private Post _newPost;
-        private Mock<IRepository> _mockPersistance;
+        private readonly AddPostResponse _response;
+        private readonly Mock<IRepository> _mockPersistance;
         private const string NewId = "myNewId";
         private Post _storedPost;
 
-        [TestInitialize]
-        public void Setup()
+        public IfPassedAValidNewPost()
         {
             _mockPersistance = new Mock<IRepository>();
             _mockPersistance
@@ -32,39 +28,40 @@ namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
             _mockPersistance
                 .Setup(m => m.GetPost(NewId))
                 .Returns(() => _storedPost);
-            _handler = AddPostHandlerTests.CreateHandler(_mockPersistance.Object);
-            _newPost = AddPostHandlerTests.CreateValidPostForAdding();
-            _response = _handler.Handle(new AddPostRequest(_newPost));
+
+            AddPostHandler handler = AddPostHandlerTests.CreateHandler(_mockPersistance.Object);
+            Post newPost = AddPostHandlerTests.CreateValidPostForAdding();
+            _response = handler.Handle(new AddPostRequest(newPost));
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenAPostIsPassedToRepository()
         {
             _mockPersistance.Verify(m => m.StorePost(It.IsAny<Post>()));
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenTheCreatePostIsRetrievedFromRepository()
         {
             _mockPersistance.Verify(m => m.GetPost(It.IsAny<string>()));
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenReturnsSuccessfully()
         {
-            Assert.IsNotNull(_response);
+            Assert.NotNull(_response);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenReturnsANewId()
         {
-            Assert.IsNotNull(_response.Post.Id);
+            Assert.NotNull(_response.Post.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenReturnsTheGeneratedId()
         {
-            Assert.AreEqual(NewId, _response.Post.Id);
+            Assert.Equal(NewId, _response.Post.Id);
         }
     }
 }

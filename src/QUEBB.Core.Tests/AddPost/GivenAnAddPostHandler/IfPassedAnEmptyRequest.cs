@@ -1,25 +1,22 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.AddPost;
+using Xunit;
 
 namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
 {
-    [TestClass]
     public class IfPassedAnEmptyRequest
     {
         private AddPostHandler _handler;
 
-        [TestInitialize]
-        public void Setup()
+        public IfPassedAnEmptyRequest()
         {
             _handler = AddPostHandlerTests.CreateHandler();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void ThrowsArgumentNullException()
         {
-            _handler.Handle(null);
+            Assert.Throws<ArgumentNullException>(()=>_handler.Handle(null));
         }
     }
 }

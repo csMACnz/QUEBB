@@ -1,67 +1,65 @@
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.Boundary;
 using QUEBB.Core.Entities;
+using Xunit;
 
 namespace QUEBB.Core.Tests.Boundary.CommonRepositoryTests.GivenAnEmptyRepository
 {
-    [TestClass]
     public abstract class WhenAPostIsAdded
     {
-        private IRepository _repository;
-        private string _createdId;
-        private Post _addedPost;
+        private readonly IRepository _repository;
+        private readonly string _createdId;
+        private readonly Post _addedPost;
         private const string CreatedTitle = "The Title";
 
         protected abstract IRepository CreateRepository();
 
-        [TestInitialize]
-        public void Setup()
+        public WhenAPostIsAdded()
         {
             _repository = CreateRepository();
             _addedPost = new Post {Id = null, Title = CreatedTitle};
             _createdId = _repository.StorePost(_addedPost);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenCreatedIdIsNotNull()
         {
-            Assert.IsNotNull(_createdId);
+            Assert.NotNull(_createdId);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenGetPostWithCreatedIdReturnsThatPost()
         {
             var retrievedPost = _repository.GetPost(_createdId);
-            Assert.IsNotNull(retrievedPost);
+            Assert.NotNull(retrievedPost);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenGetPostReturnsSavedTitle()
         {
             var retrievedPost = _repository.GetPost(_createdId);
-            Assert.AreEqual(CreatedTitle, retrievedPost.Title);
+            Assert.Equal(CreatedTitle, retrievedPost.Title);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenGetPostReturnsWithCorrectId()
         {
             var retrievedPost = _repository.GetPost(_createdId);
-            Assert.AreEqual(_createdId, retrievedPost.Id);
+            Assert.Equal(_createdId, retrievedPost.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenGetPostReturnsAPostThatIsReferenciallyDifferent()
         {
             var retrievedPost = _repository.GetPost(_createdId);
-            Assert.AreNotSame(_addedPost, retrievedPost);
+            Assert.NotSame(_addedPost, retrievedPost);
         }
 
-        [TestMethod]
+        [Fact]
         public void ThenGetPostReturnsOneResult()
         {
             var retrievedPosts = _repository.GetAllPosts();
-            Assert.AreEqual(1, retrievedPosts.Count());
+            Assert.Equal(1, retrievedPosts.Count());
         }
     }
 }

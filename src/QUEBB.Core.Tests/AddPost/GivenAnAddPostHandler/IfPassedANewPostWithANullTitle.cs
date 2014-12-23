@@ -1,18 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.AddPost;
+﻿using QUEBB.Core.AddPost;
 using QUEBB.Core.Entities;
 using QUEBB.Core.Infrastructure;
+using Xunit;
 
 namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
 {
-    [TestClass]
     public class IfPassedANewPostWithANullTitle
     {
-        private AddPostHandler _handler;
-        private Post _newPost;
+        private readonly AddPostHandler _handler;
+        private readonly Post _newPost;
 
-        [TestInitialize]
-        public void Setup()
+        public IfPassedANewPostWithANullTitle()
         {
             _handler = AddPostHandlerTests.CreateHandler();
             _newPost = AddPostHandlerTests.CreateValidPostForAdding();
@@ -20,11 +18,10 @@ namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ValidationException))]
+        [Fact]
         public void ThenThrowsAValidationException()
         {
-            _handler.Handle(new AddPostRequest(_newPost));
+            Assert.Throws<ValidationException>(() => _handler.Handle(new AddPostRequest(_newPost)));
         }
     }
 }

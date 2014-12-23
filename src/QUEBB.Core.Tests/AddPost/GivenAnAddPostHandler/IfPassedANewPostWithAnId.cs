@@ -1,29 +1,26 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.AddPost;
 using QUEBB.Core.Entities;
 using QUEBB.Core.Infrastructure;
+using Xunit;
 
 namespace QUEBB.Core.Tests.AddPost.GivenAnAddPostHandler
 {
-    [TestClass]
     public class IfPassedANewPostWithAnId
     {
-        private AddPostHandler _handler;
-        private Post _newPost;
+        private readonly AddPostHandler _handler;
+        private readonly Post _newPost;
 
-        [TestInitialize]
-        public void Setup()
+        public IfPassedANewPostWithAnId()
         {
             _handler = AddPostHandlerTests.CreateHandler();
             _newPost = AddPostHandlerTests.CreateValidPostForAdding();
             _newPost.Id = "ShouldNotHaveOne";
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ValidationException))]
+        [Fact]
         public void ThenReturnsAPostThatHasTheSameTitle()
         {
-            _handler.Handle(new AddPostRequest(_newPost));
+            Assert.Throws<ValidationException>(() => _handler.Handle(new AddPostRequest(_newPost)));
         }
     }
 }

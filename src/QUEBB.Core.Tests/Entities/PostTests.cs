@@ -1,28 +1,24 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.Entities;
+using Xunit;
 
 namespace QUEBB.Core.Tests.Entities
 {
-    [TestClass]
     public class PostTests
     {
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void CloningANullPostThrowsArgumentNullException()
         {
-            Post.Clone(null);
+            Assert.Throws<ArgumentNullException>(() => Post.Clone(null));
         }
 
-        [TestClass]
         public class WhenAPostIsCloned
         {
-            private Post _clonedPost;
+            private readonly Post _clonedPost;
             private const string ExpectedId = "ExpectedId";
             private const string ExpectedTitle = "The Expected Title";
 
-            [TestInitialize]
-            public void Setup()
+            public WhenAPostIsCloned()
             {
                 var newPost = new Post
                 {
@@ -32,22 +28,22 @@ namespace QUEBB.Core.Tests.Entities
                 _clonedPost =Post.Clone(newPost);
             }
 
-            [TestMethod]
+            [Fact]
             public void ThenDoesNotReturnNull()
             {
-                Assert.IsNotNull(_clonedPost);
+                Assert.NotNull(_clonedPost);
             }
 
-            [TestMethod]
+            [Fact]
             public void ThenTitleMatchesExpectedTitle()
             {
-                Assert.AreEqual(ExpectedTitle, _clonedPost.Title);
+                Assert.Equal(ExpectedTitle, _clonedPost.Title);
             }
 
-            [TestMethod]
+            [Fact]
             public void ThenIdMatchesExpectedId()
             {
-                Assert.AreEqual(ExpectedId, _clonedPost.Id);
+                Assert.Equal(ExpectedId, _clonedPost.Id);
             }
         }
     }

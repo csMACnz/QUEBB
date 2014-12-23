@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.Boundary;
+﻿using QUEBB.Core.Boundary;
+using Xunit;
 
 namespace QUEBB.Core.Tests.Boundary.InMemoryQueryableRepositoryTests
 {
-    [TestClass]
     public class InMemoryQueryableRepositoryTests
     {
         public static InMemoryQueryableRepository CreateRepository()
@@ -11,11 +10,11 @@ namespace QUEBB.Core.Tests.Boundary.InMemoryQueryableRepositoryTests
             return new InMemoryQueryableRepository();
         }
 
-        [TestMethod]
+        [Fact]
         public void CanCreateInMemoryQueryableRepository()
         {
             var repository = CreateRepository();
-            Assert.IsNotNull(repository);
+            Assert.NotNull(repository);
         }
     }
 }

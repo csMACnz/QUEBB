@@ -1,17 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QUEBB.Core.Boundary;
+﻿using QUEBB.Core.Boundary;
 using QUEBB.Core.GetAllPosts;
+using Xunit;
 
 namespace QUEBB.Core.Tests.GetAllPosts
 {
-    [TestClass]
     public class GetAllPostsHandlerTests
     {
-        [TestMethod]
+        [Fact]
         public void CanCreateAddPostHandler()
         {
             var handler = CreateHandler();
-            Assert.IsNotNull(handler);
+            Assert.NotNull(handler);
         }
 
         public static GetAllPostsHandler CreateHandler()

@@ -1,25 +1,22 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QUEBB.Core.GetAllPosts;
+using Xunit;
 
 namespace QUEBB.Core.Tests.GetAllPosts.GivenAGetAllPostsHandler
 {
-    [TestClass]
     public class IfPassedAnEmptyRequest
     {
         private GetAllPostsHandler _handler;
 
-        [TestInitialize]
-        public void Setup()
+        public IfPassedAnEmptyRequest()
         {
             _handler = GetAllPostsHandlerTests.CreateHandler();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void ThrowsArgumentNullException()
         {
-            _handler.Handle(null);
+            Assert.Throws<ArgumentNullException>(() => _handler.Handle(null));
         }
     }
 }
