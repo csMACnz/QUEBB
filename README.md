@@ -6,7 +6,7 @@ QUEBB
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://csmacnz.mit-license.org)
 [![Build status](https://ci.appveyor.com/api/projects/status/x2n05hs1yitrt0ol)](https://ci.appveyor.com/project/MarkClearwater/quebb)
-[![Build Status](https://travis-ci.org/csmacnz/QUEBB.svg)](https://travis-ci.org/csmacnz/QUEBB)
+[![Build Status](https://travis-ci.org/csMACnz/QUEBB.svg)](https://travis-ci.org/csMACnz/QUEBB)
 [![Coverage Status](https://coveralls.io/repos/csmacnz/QUEBB/badge.png)](https://coveralls.io/r/csmacnz/QUEBB)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/3768/badge.svg)](https://scan.coverity.com/projects/3768)
 [![Stories in Ready](https://badge.waffle.io/csmacnz/QUEBB.svg?label=ready&title=Ready)](http://waffle.io/csmacnz/QUEBB)
