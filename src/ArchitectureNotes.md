@@ -12,7 +12,7 @@ This talk has a technique to not hide the magic, while still performing dependen
 * [InfoQ Keynote: 8 Lines of Code](http://www.infoq.com/presentations/8-lines-code-refactoring)
 
 
- - Uncle Bob
+Ports and Adapters - Uncle Bob
 ---
 
 
